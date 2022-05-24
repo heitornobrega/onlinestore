@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from '../Components/ProductCard';
+import Categories from '../Components/Categories';
 
 class Home extends React.Component {
   state ={
@@ -56,6 +57,7 @@ class Home extends React.Component {
     const { search } = this.state;
     return (
       <>
+        <Categories />
         <form>
           <label htmlFor="busca">
             <input
