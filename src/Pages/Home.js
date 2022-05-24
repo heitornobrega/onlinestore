@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Categories from '../components/Categories';
 
 class Home extends React.Component {
   render() {
     return (
       <>
+        <Categories />
         <form>
           <label htmlFor="busca">
             <input type="text" id="busca" />
