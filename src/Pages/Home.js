@@ -16,5 +16,5 @@ class Home extends React.Component {
     );
   }
 }
-
+// alteração para commit
 export default Home;
