@@ -32,12 +32,17 @@ class Home extends React.Component {
       if (searchResults.length) {
         return (
           <ol>
-            {searchResults.map((result) => (
-              <ProductCard
-                result={ result }
-                key={ result.id }
-              />
-            ))}
+            {searchResults.map((result) => {
+              const { title, price, thumbnail, id } = result;
+              return (
+                <ProductCard
+                  key={ id }
+                  title={ title }
+                  price={ price }
+                  thumbnail={ thumbnail }
+                />
+              );
+            })}
           </ol>);
       } return <p>Nenhum produto foi encontrado</p>;
     }
