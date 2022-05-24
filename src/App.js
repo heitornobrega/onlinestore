@@ -1,14 +1,23 @@
 import React from 'react';
 import './App.css';
-import Categories from './components/Categories';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Pages/Home';
+import ShoppingCart from './Pages/ShoppingCart';
 
 function App() {
   return (
-    <>
-      <Home />
-      <Categories />
-    </>
+    <BrowserRouter>
+      <Switch>
+        <Route
+          path="/shopping-cart"
+          render={ (props) => <ShoppingCart { ...props } /> }
+        />
+        <Route
+          path="/"
+          render={ (props) => <Home { ...props } /> }
+        />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
