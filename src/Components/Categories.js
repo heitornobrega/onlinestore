@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { getCategories } from '../services/api';
 
 class Categories extends React.Component {
@@ -17,6 +19,7 @@ class Categories extends React.Component {
 
   render() {
     const { categorias } = this.state;
+    const { callback } = this.props;
     return (
       <>
         {categorias.map((categoria) => (
@@ -30,6 +33,7 @@ class Categories extends React.Component {
               id={ categoria.id }
               name="categoria"
               value={ categoria.name }
+              onChange={ callback }
             />
             { categoria.name }
           </label>
@@ -38,5 +42,9 @@ class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = {
+  callback: PropTypes.func.isRequired,
+};
 
 export default Categories;
