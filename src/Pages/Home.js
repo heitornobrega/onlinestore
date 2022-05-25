@@ -10,6 +10,7 @@ class Home extends React.Component {
     category: '',
     searchResults: [],
     hasSearched: false,
+
   }
 
   handleChange = (event) => {
@@ -53,11 +54,22 @@ class Home extends React.Component {
       </p>);
   }
 
+  getSelectedCategory = async (event) => {
+    await this.setState({ category: event.target.id });
+    const { search, category } = this.state;
+    const fetchProduct = await getProductsFromCategoryAndQuery(category, search);
+    console.log(fetchProduct);
+    this.setState({
+      searchResults: fetchProduct.results,
+      hasSearched: true,
+    });
+  }
+
   render() {
     const { search } = this.state;
     return (
       <>
-        <Categories />
+        <Categories callback={ this.getSelectedCategory } />
         <form>
           <label htmlFor="busca">
             <input
