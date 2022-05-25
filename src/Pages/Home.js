@@ -10,12 +10,12 @@ class Home extends React.Component {
     category: '',
     searchResults: [],
     hasSearched: false,
-
   }
 
   handleChange = (event) => {
+    const { value, name } = event.target;
     this.setState({
-      search: event.target.value,
+      [name]: value,
     });
   }
 
@@ -39,6 +39,7 @@ class Home extends React.Component {
               return (
                 <ProductCard
                   key={ id }
+                  id={ id }
                   title={ title }
                   price={ price }
                   thumbnail={ thumbnail }
@@ -58,7 +59,6 @@ class Home extends React.Component {
     await this.setState({ category: event.target.id });
     const { search, category } = this.state;
     const fetchProduct = await getProductsFromCategoryAndQuery(category, search);
-    console.log(fetchProduct);
     this.setState({
       searchResults: fetchProduct.results,
       hasSearched: true,
@@ -74,6 +74,7 @@ class Home extends React.Component {
           <label htmlFor="busca">
             <input
               onChange={ this.handleChange }
+              name="search"
               value={ search }
               data-testid="query-input"
               type="text"
@@ -101,5 +102,5 @@ class Home extends React.Component {
     );
   }
 }
-// alteração para commit
+
 export default Home;
