@@ -15,19 +15,19 @@ class ProductCard extends React.Component {
     const { title, price, thumbnail, id } = this.props;
     return (
       <li data-testid="product">
-      <Link to={`/details${id}/${title}`} data-testid="product-detail-link">
-      <p>{ title }</p>
-        <img src={ thumbnail } alt={ title } />
-        <p>{ price }</p>
-            </Link>
-              <button
-              type="button"
-              data-testid="product-add-to-cart"
-              onClick={ this.addToShoppingCart }
-            >
-              Adicionar ao carrinho
+        <Link to={ `/details${id}/${title}` } data-testid="product-detail-link">
+          <p>{ title }</p>
+          <img src={ thumbnail } alt={ title } />
+          <p>{ price }</p>
+        </Link>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ this.addToShoppingCart }
+        >
+          Adicionar ao carrinho
         </button>
-        </li>
+      </li>
     );
   }
 }
