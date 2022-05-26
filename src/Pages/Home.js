@@ -5,7 +5,7 @@ import ProductCard from '../Components/ProductCard';
 import Categories from '../Components/Categories';
 
 class Home extends React.Component {
-  state ={
+  state = {
     search: '',
     category: '',
     searchResults: [],
@@ -42,8 +42,8 @@ class Home extends React.Component {
                   id={ id }
                   title={ title }
                   price={ price }
-                  thumbnail={thumbnail}
-                  />
+                  thumbnail={ thumbnail }
+                />
               );
             })}
           </ol>);

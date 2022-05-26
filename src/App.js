@@ -5,7 +5,6 @@ import Home from './Pages/Home';
 import ShoppingCart from './Pages/ShoppingCart';
 import ProductDetails from './Pages/ProductDetails';
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -14,9 +13,10 @@ function App() {
           path="/shopping-cart"
           render={ (props) => <ShoppingCart { ...props } /> }
         />
-          <Route path="/details:id/:title"
-          render={(props) => <ProductDetails {...props} /> }
-          />
+        <Route
+          path="/details:id/:title"
+          render={ (props) => <ProductDetails { ...props } /> }
+        />
         <Route
           path="/"
           render={ (props) => <Home { ...props } /> }
