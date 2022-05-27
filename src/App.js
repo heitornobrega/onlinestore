@@ -14,7 +14,7 @@ function App() {
           render={ (props) => <ShoppingCart { ...props } /> }
         />
         <Route
-          path="/details:id/:title"
+          path="/details:id/:title/:price/:thumbnail"
           render={ (props) => <ProductDetails { ...props } /> }
         />
         <Route
