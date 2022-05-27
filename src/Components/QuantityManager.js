@@ -6,7 +6,8 @@ class QuantityManager extends React.Component {
     const { title, price, thumbnail, id } = this.props;
     let prevItems = JSON.parse(localStorage.getItem('items'));
     if (!prevItems) prevItems = [];
-    prevItems.push({ title, price, thumbnail, id });
+    const order = prevItems[prevItems.length - 1] + 1;
+    prevItems.push({ title, price, thumbnail, id, order });
     localStorage.setItem('items', JSON.stringify(prevItems));
   }
 

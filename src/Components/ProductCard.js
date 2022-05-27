@@ -7,7 +7,8 @@ class ProductCard extends React.Component {
     const { title, price, thumbnail, id } = this.props;
     let prevItems = JSON.parse(localStorage.getItem('items'));
     if (!prevItems) prevItems = [];
-    prevItems.push({ title, price, thumbnail, id });
+    const lastItem = prevItems[prevItems.length - 1] || { order: 0 };
+    prevItems.push({ title, price, thumbnail, id, order: lastItem.order + 1 });
     localStorage.setItem('items', JSON.stringify(prevItems));
   }
 
