@@ -15,7 +15,10 @@ class ProductCard extends React.Component {
     const { title, price, thumbnail, id } = this.props;
     return (
       <li data-testid="product">
-        <Link to={ `/details${id}/${title}` } data-testid="product-detail-link">
+        <Link
+          to={ `/details${id}/${title}/${price}/${thumbnail}` }
+          data-testid="product-detail-link"
+        >
           <p>{ title }</p>
           <img src={ thumbnail } alt={ title } />
           <p>{ price }</p>
