@@ -1,20 +1,29 @@
 import React from 'react';
+import ShoppingCartItem from '../Components/ShoppingCartItem';
 
 class ShoppingCart extends React.Component {
   state = {
-    unfilteredList: JSON.parse(localStorage.getItem('items')) || [],
+    unfilteredList: [],
     productList: [],
     itemsQuantities: {},
   };
 
-  componentDidMount = async () => {
+  componentDidMount = () => {
+    this.updateItems();
+  }
+
+  updateItems = async () => {
+    await this.setState({
+      unfilteredList: JSON.parse(localStorage.getItem('items')) || [],
+    });
     await this.countItems();
     const { itemsQuantities, unfilteredList } = this.state;
     const uniqueProductIDs = Object.keys(itemsQuantities);
     const productList = uniqueProductIDs.map((id) => (
       unfilteredList.find((item) => item.id === id)
     ));
-    this.setState({ productList });
+    productList.sort((a, b) => a.order - b.order);
+    this.setState({ productList, itemsQuantities });
   }
 
   countItems = () => {
@@ -28,7 +37,7 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { productList, itemsQuantities, unfilteredList } = this.state;
+    const { itemsQuantities, unfilteredList, productList } = this.state;
     if (!unfilteredList.length) {
       return (
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
@@ -39,12 +48,15 @@ class ShoppingCart extends React.Component {
         {productList.map((product) => {
           const { title, price, thumbnail, id } = product;
           return (
-            <li data-testid="product" key={ id }>
-              <p data-testid="shopping-cart-product-name">{title}</p>
-              <img src={ thumbnail } alt={ title } />
-              <p>{price}</p>
-              <p data-testid="shopping-cart-product-quantity">{itemsQuantities[id]}</p>
-            </li>
+            <ShoppingCartItem
+              key={ id }
+              id={ id }
+              title={ title }
+              price={ price }
+              thumbnail={ thumbnail }
+              itemsQuantities={ itemsQuantities[id] }
+              updateItems={ this.updateItems }
+            />
           );
         })}
       </ul>
