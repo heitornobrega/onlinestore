@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ShoppingCartItem from '../Components/ShoppingCartItem';
 
 class ShoppingCart extends React.Component {
@@ -44,22 +45,25 @@ class ShoppingCart extends React.Component {
       );
     }
     return (
-      <ul>
-        {productList.map((product) => {
-          const { title, price, thumbnail, id } = product;
-          return (
-            <ShoppingCartItem
-              key={ id }
-              id={ id }
-              title={ title }
-              price={ price }
-              thumbnail={ thumbnail }
-              itemsQuantities={ itemsQuantities[id] }
-              updateItems={ this.updateItems }
-            />
-          );
-        })}
-      </ul>
+      <div>
+        <Link to="/checkout" data-testid="checkout-products">Continuar compra</Link>
+        <ul>
+          {productList.map((product) => {
+            const { title, price, thumbnail, id } = product;
+            return (
+              <ShoppingCartItem
+                key={ id }
+                id={ id }
+                title={ title }
+                price={ price }
+                thumbnail={ thumbnail }
+                itemsQuantities={ itemsQuantities[id] }
+                updateItems={ this.updateItems }
+              />
+            );
+          })}
+        </ul>
+      </div>
     );
   }
 }
