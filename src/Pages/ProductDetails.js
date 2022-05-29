@@ -6,8 +6,22 @@ import Rate from '../Components/Rate';
 import QuantityManager from '../Components/QuantityManager';
 
 class ProductDetails extends React.Component {
+  state = {
+    cartLength: 0,
+  }
+
+  componentDidMount = () => {
+    const cartItems = JSON.parse(localStorage.getItem('items')) || [];
+    this.getCartLength(cartItems.length);
+  }
+
+  getCartLength = (callback) => {
+    this.setState({ cartLength: callback });
+  }
+
   render() {
     const { match: { params: { title, id, price, thumbnail } } } = this.props;
+    const { cartLength } = this.state;
     return (
       <>
         <Details
@@ -18,12 +32,17 @@ class ProductDetails extends React.Component {
           id={ id }
           price={ price }
           thumbnail={ thumbnail }
+          getCartLength={ this.getCartLength }
         />
         <Link
           to="/shopping-cart"
           data-testid="shopping-cart-button"
         >
-          Carrinho de Compras
+          <p data-testid="shopping-cart-size">
+            Carrinho de Compras (
+            {cartLength}
+            )
+          </p>
         </Link>
         <Rate id={ id } />
       </>
