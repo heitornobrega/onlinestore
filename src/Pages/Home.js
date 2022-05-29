@@ -10,6 +10,12 @@ class Home extends React.Component {
     category: '',
     searchResults: [],
     hasSearched: false,
+    cartLength: 0,
+  }
+
+  componentDidMount = () => {
+    const cartItems = JSON.parse(localStorage.getItem('items')) || [];
+    this.getCartLength(cartItems.length);
   }
 
   handleChange = (event) => {
@@ -28,6 +34,10 @@ class Home extends React.Component {
     });
   }
 
+  getCartLength = (callback) => {
+    this.setState({ cartLength: callback });
+  }
+
   conditionalRender = () => {
     const { searchResults, hasSearched } = this.state;
     if (hasSearched) {
@@ -43,6 +53,7 @@ class Home extends React.Component {
                   title={ title }
                   price={ price }
                   thumbnail={ thumbnail }
+                  getCartLength={ this.getCartLength }
                 />
               );
             })}
@@ -66,7 +77,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { search } = this.state;
+    const { search, cartLength } = this.state;
     return (
       <>
         <Categories callback={ this.getSelectedCategory } />
@@ -93,7 +104,11 @@ class Home extends React.Component {
           to="/shopping-cart"
           data-testid="shopping-cart-button"
         >
-          Carrinho de Compras
+          <p data-testid="shopping-cart-size">
+            Carrinho de Compras (
+            {cartLength}
+            )
+          </p>
         </Link>
         {
           this.conditionalRender()
