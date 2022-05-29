@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './Pages/Home';
 import ShoppingCart from './Pages/ShoppingCart';
 import ProductDetails from './Pages/ProductDetails';
+import CheckoutProducts from './Pages/CheckoutProducts';
 
 function App() {
   return (
@@ -18,10 +19,13 @@ function App() {
           render={ (props) => <ProductDetails { ...props } /> }
         />
         <Route
+          path="/checkout"
+          render={ (props) => <CheckoutProducts { ...props } /> }
+        />
+        <Route
           path="/"
           render={ (props) => <Home { ...props } /> }
         />
-
       </Switch>
     </BrowserRouter>
   );
