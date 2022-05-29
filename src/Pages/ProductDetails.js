@@ -6,46 +6,29 @@ import Rate from '../Components/Rate';
 import QuantityManager from '../Components/QuantityManager';
 
 class ProductDetails extends React.Component {
-    state = {
-      rateInputEmail: '',
-      rateTextArea: '',
-    }
-
-    handleChange = (event) => {
-      const { value, name } = event.target;
-      this.setState({
-        [name]: value,
-      });
-    }
-
-    render() {
-      const { match: { params: { title, id, price, thumbnail } } } = this.props;
-      const { rateTextArea, rateInputEmail } = this.state;
-      return (
-        <>
-          <Details
-            title={ title }
-          />
-          <Rate
-            rateInputEmail={ rateInputEmail }
-            rateTextArea={ rateTextArea }
-            handleChange={ this.handleChange }
-          />
-          <QuantityManager
-            title={ title }
-            id={ id }
-            price={ price }
-            thumbnail={ thumbnail }
-          />
-          <Link
-            to="/shopping-cart"
-            data-testid="shopping-cart-button"
-          >
-            Carrinho de Compras
-          </Link>
-        </>
-      );
-    }
+  render() {
+    const { match: { params: { title, id, price, thumbnail } } } = this.props;
+    return (
+      <>
+        <Details
+          title={ title }
+        />
+        <QuantityManager
+          title={ title }
+          id={ id }
+          price={ price }
+          thumbnail={ thumbnail }
+        />
+        <Link
+          to="/shopping-cart"
+          data-testid="shopping-cart-button"
+        >
+          Carrinho de Compras
+        </Link>
+        <Rate id={ id } />
+      </>
+    );
+  }
 }
 
 ProductDetails.propTypes = {
