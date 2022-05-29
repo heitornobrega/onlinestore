@@ -49,7 +49,7 @@ class ShoppingCart extends React.Component {
         <Link to="/checkout" data-testid="checkout-products">Continuar compra</Link>
         <ul>
           {productList.map((product) => {
-            const { title, price, thumbnail, id } = product;
+            const { title, price, thumbnail, id, availableQuantity } = product;
             return (
               <ShoppingCartItem
                 key={ id }
@@ -59,6 +59,7 @@ class ShoppingCart extends React.Component {
                 thumbnail={ thumbnail }
                 itemsQuantities={ itemsQuantities[id] }
                 updateItems={ this.updateItems }
+                availableQuantity={ availableQuantity }
               />
             );
           })}

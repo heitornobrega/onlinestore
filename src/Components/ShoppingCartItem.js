@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 class ShoppingCartItem extends React.Component {
   state = {
     itemQuantity: 1,
+    availableQuantity: 1,
   }
 
   componentDidMount = () => {
-    const { itemsQuantities } = this.props;
-    this.setState({ itemQuantity: itemsQuantities });
+    const { itemsQuantities, availableQuantity } = this.props;
+    this.setState({ itemQuantity: itemsQuantities, availableQuantity });
   }
 
   addToShoppingCart = async () => {
@@ -42,7 +43,7 @@ class ShoppingCartItem extends React.Component {
 
   render() {
     const { title, price, thumbnail, id } = this.props;
-    const { itemQuantity } = this.state;
+    const { itemQuantity, availableQuantity } = this.state;
     return (
       <li data-testid="product" key={ id }>
         <p data-testid="shopping-cart-product-name">{title}</p>
@@ -61,6 +62,7 @@ class ShoppingCartItem extends React.Component {
           type="button"
           onClick={ this.addToShoppingCart }
           data-testid="product-increase-quantity"
+          disabled={ itemQuantity >= availableQuantity }
         >
           +
         </button>
@@ -76,6 +78,7 @@ ShoppingCartItem.propTypes = {
   id: PropTypes.string.isRequired,
   itemsQuantities: PropTypes.number.isRequired,
   updateItems: PropTypes.func.isRequired,
+  availableQuantity: PropTypes.number.isRequired,
 };
 
 export default ShoppingCartItem;
