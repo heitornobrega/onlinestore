@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Details from '../Components/Details';
 import Rate from '../Components/Rate';
 import QuantityManager from '../Components/QuantityManager';
+import FreeShipping from '../Components/FreeShipping';
 
 class ProductDetails extends React.Component {
   state = {
@@ -22,12 +23,13 @@ class ProductDetails extends React.Component {
   render() {
     const { cartLength } = this.state;
     const { match: { params: { title, id,
-      thumbnail, availableQuantity, price } } } = this.props;
+      thumbnail, availableQuantity, price, shipping } } } = this.props;
     return (
       <>
         <Details
           title={ title }
         />
+        { shipping && <FreeShipping /> }
         <QuantityManager
           title={ title }
           id={ id }
@@ -60,6 +62,7 @@ ProductDetails.propTypes = {
       price: PropTypes.string,
       thumbnail: PropTypes.string,
       availableQuantity: PropTypes.string,
+      shipping: PropTypes.bool.isRequired,
     }),
   }).isRequired,
 };

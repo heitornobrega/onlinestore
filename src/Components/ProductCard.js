@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import FreeShipping from './FreeShipping';
 
 class ProductCard extends React.Component {
   addToShoppingCart = () => {
@@ -15,16 +16,17 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { title, price, thumbnail, id, availableQuantity } = this.props;
+    const { title, price, thumbnail, id, availableQuantity, shipping } = this.props;
     return (
       <li data-testid="product">
         <Link
           to={
             `/details${id}/${title}/${price}/
-            ${encodeURIComponent(thumbnail)}/${availableQuantity}`
+            ${encodeURIComponent(thumbnail)}/${availableQuantity}/${shipping}`
           }
           data-testid="product-detail-link"
         >
+          { shipping && <FreeShipping /> }
           <p>{ title }</p>
           <img src={ thumbnail } alt={ title } />
           <p>{ price }</p>
@@ -48,6 +50,7 @@ ProductCard.propTypes = {
   id: PropTypes.string.isRequired,
   getCartLength: PropTypes.func.isRequired,
   availableQuantity: PropTypes.number.isRequired,
+  shipping: PropTypes.bool.isRequired,
 };
 
 export default ProductCard;

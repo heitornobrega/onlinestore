@@ -45,8 +45,8 @@ class Home extends React.Component {
         return (
           <ol>
             {searchResults.map((result) => {
-              const { title, price,
-                thumbnail, id, available_quantity: availableQuantity } = result;
+              const { title, price, thumbnail, id, available_quantity: availableQuantity,
+                shipping: { free_shipping: shipping } } = result;
               if (!availableQuantity) console.log(result);
               return (
                 <ProductCard
@@ -55,6 +55,7 @@ class Home extends React.Component {
                   title={ title }
                   price={ price }
                   thumbnail={ thumbnail }
+                  shipping={ shipping }
                   getCartLength={ this.getCartLength }
                   availableQuantity={ availableQuantity }
                 />
