@@ -20,8 +20,9 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { match: { params: { title, id, price, thumbnail } } } = this.props;
     const { cartLength } = this.state;
+    const { match: { params: { title, id,
+      thumbnail, availableQuantity, price } } } = this.props;
     return (
       <>
         <Details
@@ -33,6 +34,7 @@ class ProductDetails extends React.Component {
           price={ price }
           thumbnail={ thumbnail }
           getCartLength={ this.getCartLength }
+          availableQuantity={ availableQuantity }
         />
         <Link
           to="/shopping-cart"
@@ -57,6 +59,7 @@ ProductDetails.propTypes = {
       id: PropTypes.string,
       price: PropTypes.string,
       thumbnail: PropTypes.string,
+      availableQuantity: PropTypes.string,
     }),
   }).isRequired,
 };
